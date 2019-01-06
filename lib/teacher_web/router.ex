@@ -16,6 +16,10 @@ defmodule TeacherWeb.Router do
   scope "/", TeacherWeb do
     pipe_through :browser
 
+    resources "/sessions", SessionController, only: [:new, :create]
+    delete "/sign-out", SessionController, :delete
+    resources "/registrations", RegistrationController, only: [:new, :create]
+
     get "/", PageController, :index
   end
 

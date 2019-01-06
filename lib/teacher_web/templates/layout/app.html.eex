@@ -9,6 +9,12 @@
   </head>
   <body>
     <main role="main" class="container">
+      <%= if Teacher.Auth.user_signed_in?(@conn) do %>
+        <%= link "Sign out", to: Routes.session_path(@conn, :delete), method: :delete %>
+      <% else %>
+        <%= link "Sign in", to: Routes.session_path(@conn, :new) %> |
+        <%= link "Sign up", to: Routes.registration_path(@conn, :new) %>
+      <% end %>
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
       <%= render @view_module, @view_template, assigns %>
